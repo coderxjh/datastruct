@@ -227,7 +227,7 @@ void LevelOrder(BTNode *b) {
 
 int main() {
     BTNode *btNode;
-//    CreateBTree(btNode, "A(B(D(,G)),C(E,F))");
+    CreateBTree(btNode, "A(B(D(,G)),C(E,F))");
 //    DispBTree(btNode);
 //    printf("\n");
 //    AllPath1(btNode);

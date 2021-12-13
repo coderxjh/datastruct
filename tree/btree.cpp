@@ -237,3 +237,20 @@ BTNode *CreateBT2(char post[], char in[], int n) {
     b->rchild = CreateBT2(post + k, p + 1, n - k - 1);
     return b;
 }
+
+/**
+ * 创建一颗二叉树，约定用户遵照前序遍历的方式输入数据
+ * @param b
+ */
+void CreateBTree2(BTNode *b) {
+    char ch;
+    scanf("%c", &ch);
+    if (' ' == ch) {
+        b = NULL;
+    } else {
+        b = (BTNode *) malloc(sizeof(BTNode));
+        b->data = ch;
+        CreateBTree2(b->lchild);
+        CreateBTree2(b->rchild);
+    }
+}
