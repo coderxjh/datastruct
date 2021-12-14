@@ -2,7 +2,7 @@
 // Created by 肖江辉 on 2021/12/11.
 //
 #include <malloc.h>
-#include "SqStack.cpp"
+#include "btSqStack.cpp"
 typedef struct {
     BTNode *data[MaxSize];
     int front, rear;
