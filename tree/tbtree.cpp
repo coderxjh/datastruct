@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 //
-// Created by è‚–æ±Ÿè¾‰ on 2021/12/13.
+// Created by Ð¤½­»Ô on 2021/12/13.
 //
 typedef struct node {
     char data;
@@ -89,7 +89,7 @@ TBTNode *ThreadedTBTree(TBTNode *b) {
 }
 
 /**
- * éåŽ†çº¿ç´¢äºŒå‰æ ‘
+ * ±éÀúÏßË÷¶þ²æÊ÷
  */
 void ThInOrder(TBTNode *tb) {
     TBTNode *p = tb->lchild;
