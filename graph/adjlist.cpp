@@ -1,0 +1,66 @@
+//
+// Created by 肖江辉 on 2021/12/26.
+//
+#include <stdio.h>
+#include <iostream>
+
+#define MVNum 100       //最大顶点数
+typedef char VerTexType;   //设顶点的数据类型为字符型
+typedef int ArcType;        //假设边的权值类型为整型
+//边的结点结构
+typedef struct ArcNode {
+    int adjvex; //该边所指向的顶点的位置
+    struct ArcNode *nextarc; //指向下一条边的指针
+    int weight;   //边的相关信息
+} ArcNode;
+//顶点的结点结构
+typedef struct VNode {
+    VerTexType data;    //顶点信息
+    ArcNode *firstarc;  //指向第一条依附该顶点的边的指针
+} VNode;
+
+typedef struct {
+    VNode vexs[MVNum];  //邻接表类型
+    int vexnum, arcnum;  //当前顶点数和边数
+} ALGraph;
+
+int LocateVex(ALGraph G, VerTexType u) {
+    for (int i = 0; i < G.vexnum; ++i) {
+        if (u == G.vexs[i].data) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool CreateUDG(ALGraph &G) {
+    int i, j, w;
+    char v1, v2;
+    ArcNode *p1, *p2;
+    std::cin >> G.vexnum >> G.arcnum;   //输入总顶点数、总边数
+    //输入各点，构造头结点表
+    for (i = 0; i < G.vexnum; ++i) {
+        std::cin >> G.vexs[i].data; //输入顶点值
+        G.vexs[i].firstarc = nullptr;   //初始化表头结点的指针域
+    }
+    //输入各点，构造邻接表
+    for (int k = 0; k < G.arcnum; ++k) {
+        std::cin >> v1 >> v2 >> w;   //输入一条边依附的两个顶点
+        i = LocateVex(G, v1);
+        j = LocateVex(G, v2);
+        //删除一下代码，为出度边表，即邻接表
+        p1 = new ArcNode;   //生成一个新的边结点p1
+        p1->adjvex = j;     //邻接点序号为j
+        p1->weight = w;     //边<v1,v2>的权值置为w
+        p1->nextarc = G.vexs[i].firstarc;
+        G.vexs[i].firstarc = p1;    //将新结点p1插入顶点vi的边表头部
+
+        //删除一下代码，为入度边表，即逆邻接表
+        p2 = new ArcNode;   //生成一个新的边结点p2
+        p2->adjvex = i;     //邻接点序号为i
+        p2->weight = w;     //置<v1,v2>的对称边<v2,v1>的权值为w
+        p2->nextarc = G.vexs[i].firstarc;
+        G.vexs[i].firstarc = p1;    //将新结点p2插入顶点vj的边表头部
+    }
+    return true;
+}
